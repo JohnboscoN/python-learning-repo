@@ -51,21 +51,6 @@ def test_sum_prod():
     assert prod == 15
 
 
-test_df = pd.DataFrame(
-        [
-            {"ChildId": "child1", "Age": 6},
-            {"ChildId": "child3", "Age": 10},
-            {"ChildId": "child2", "Age": 4},
-            {"ChildId": "child4", "Age": 1},
-        ]
-    )
-
-expected_df = pd.DataFrame(
-        [
-            {"ChildId": "child1", "Age": 6},
-            {"ChildId": "child3", "Age": 10},
-         ]   
-    )
 
 def df_slicer(df, age):
     age_or_over = df[df['Age'] >= age]
@@ -81,15 +66,42 @@ def test_df_slicer():
         ]
     )
 
-sliced_df = df_slicer(test_df, 5)
+    sliced_df = df_slicer(test_df, 5)
 
-expected_df = pd.DataFrame(
+    expected_df = pd.DataFrame(
     [
         {"ChildId": "child1", "Age": 6},
         {"ChildId": "child3", "Age": 10},
      ]   
     )
 
-pd.testing.assert_frame_equal(sliced_df, expected_df, check_names=None)
+    pd.testing.assert_frame_equal(sliced_df, expected_df, check_names=None)
+
+
+
+def df_slicer(df, age):
+    age_or_over = df[df['Age'] >= age]
+    return age_or_over
+
+def test_df_slicer():
+    test_df = pd.DataFrame(
+    [
+    {"ChildId": "child1", "Age": 6},
+    {"ChildId": "child3", "Age": 10},
+    {"ChildId": "child2", "Age": 4},
+    {"ChildId": "child4", "Age": 1},
+]
+)
+
+    sliced_df = df_slicer(test_df, 5)
+
+    expected_df = pd.DataFrame(
+        [
+            {"ChildId": "child1", "Age": 6},
+            {"ChildId": "child3", "Age": 10},
+         ]   
+    )
+
+    pd.testing.assert_frame_equal(sliced_df,expected_df,check_names=None)
  
 
